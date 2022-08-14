@@ -1,9 +1,22 @@
 import os
 import time
+subnetmask={4:'/30 255.255.255.252',
+            8:'/29 255.255.255.248',
+            16:'/28 255.255.255.240',
+            32:'/27 255.255.255.224',
+            64:'/26 255.255.255.192',
+            128:'/25 255.255.255.128',
+            256:'/24 255.255.255.0',
+            512:'/23 255.255.254.0',
+            1024:'/22 255.255.252.0',
+            2048:'/21 255.255.248.0',
+            4096:'/20 255.255.240.0',
+            8192:'/19 255.255.224.0',
+            16384:'/18 255.255.192.0',
+            32768:'/17 255.255.128.0',}
 
-
-
-def try_again(value,counter=None):
+print(subnetmask[4])
+'''def try_again(value,counter=None):
         plus=0
         check=0
         while True:        
@@ -42,7 +55,7 @@ def try_again(value,counter=None):
 main_network=try_again(1)
 networks=try_again(2)
 network=try_again(3,3)
-print(main_network,"",networks,"",network)
+print(main_network,"",networks,"",network)'''
 
 '''a=[3,5,2,6,34,5,4,3,2,3]
 b=a.copy()
