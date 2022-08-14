@@ -4,6 +4,17 @@ import time
 
 
 def run():
+
+    def correction(a,list):
+        if a < 256:
+            list[3]=a
+            return list
+        else:
+            floatnet=a/256
+            network_type_D,network_type_C =math.modf(floatnet)
+            list[3]=int(network_type_D*256)
+            list[2]=int(network_type_C)+int(list[2])
+            return list
     def try_again(value,counter=None):
         plus=0
         check=0
@@ -12,6 +23,8 @@ def run():
                 if value == 1:
 
                     main_network=input('enter main network \nexample "192.168.0.0"\n R= ') 
+                    #variable for test without input parameter
+                    # main_network='192.168.0.0'
                     for i in main_network:
                         if i =='.':
                             plus+=1
@@ -32,9 +45,11 @@ def run():
                     
                 elif value== 2:
                     networks=int(input('how many subnetworks would you like calculate ? '))
+                    #variable of test without input networks=5
                     return networks
                 elif value==3:
                     network=int(input(f'enter host of network  {counter}= '))
+                    
                     return network
             except ValueError:
                 print("wrong value\n try again")
@@ -49,16 +64,18 @@ def run():
             
         
         ip_route=main_network.copy()
-    
-        ip_route[3]=1+int(ip_route[3])
-        ip_route=".".join(str(i)for i in ip_route)
+        a=1+int(ip_route[3])
+        ip_route=correction(a,ip_route)      
+        ip_route=".".join(str(i)for i in ip_route)               
         str_last_ip=main_network.copy()
-        str_last_ip[3]=int(network_type_D*256)
+        str_last_ip[3]=int(network_type_D*256) 
         str_last_ip[2]=int(network_type_C)+int(str_last_ip[2])
         broadcast_ip=str_last_ip.copy()
-        broadcast_ip[3]=1+int(broadcast_ip[3])
+        a=1+int(broadcast_ip[3])
+        broadcast_ip=correction(a,broadcast_ip)
         main_network=broadcast_ip.copy()
-        main_network[3]=1+int(broadcast_ip[3])
+        a=1+int(main_network[3])
+        main_network=correction(a,main_network)
         broadcast_ip=".".join(str(i)for i in broadcast_ip)
         str_last_ip=".".join(str(i)for i in str_last_ip)
         
@@ -79,7 +96,7 @@ def run():
     networks=try_again(2)
     counter=0
     list_network=[]
-    subred=2
+    
     
     while True:
         #number of network
@@ -96,6 +113,7 @@ def run():
     list_network.reverse()
     #for to know useble host for each one network
     for n in list_network:
+        subred=2
         while True:
             if n <=subred:
                 subred=subred-2
