@@ -1,8 +1,54 @@
-a=[3,5,2,6,34,5,4,3,2,3]
+import os
+import time
+
+
+
+def try_again(value,counter=None):
+        plus=0
+        check=0
+        while True:        
+            try:            
+                if value == 1:
+
+                    main_network=input('enter main network \nexample "192.168.0.0"\n R= ') 
+                    for i in main_network:
+                        if i =='.':
+                            plus+=1
+                    if plus==3:
+                        me=main_network.split('.')
+                        for i in me:
+                            if int(i)>=256 or i =='':
+                                check+=1
+                        if check== 0:                                               
+                            return main_network
+                        else:
+                            check=0
+                            plus=0
+                            raise ValueError
+                            
+                    else:
+                        raise ValueError
+                    
+                elif value== 2:
+                    networks=int(input('how many subnetworks would you like calculate ? '))
+                    return networks
+                elif value==3:
+                    network=int(input(f'enter host of network  {counter}= '))
+                    return network
+            except ValueError:
+                print("wrong value\n try again")
+                time.sleep(2)
+                os.system('cls' if os.name == 'nt' else 'clear')
+main_network=try_again(1)
+networks=try_again(2)
+network=try_again(3,3)
+print(main_network,"",networks,"",network)
+
+'''a=[3,5,2,6,34,5,4,3,2,3]
 b=a.copy()
 b.append('wac')
 print(a)
-print(b)
+print(b)'''
 '''
 h=12
 def run():
